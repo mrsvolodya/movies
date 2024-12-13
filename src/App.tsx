@@ -1,24 +1,14 @@
 import React from "react";
-import "./App.css";
+import { MoviesList } from "./components/MovieList/MoviesList.tsx";
 
-function App() {
+export function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="bg-mainBack">
+      <header></header>
+      <main>
+        <MoviesList />
+      </main>
+      <footer></footer>
     </div>
   );
 }
-
-export default App;
