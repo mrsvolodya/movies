@@ -1,0 +1,60 @@
+[
+  {
+    "id": "title",
+    "label": "Movie Title",
+    "type": "text",
+    "placeholder": "Enter the movie title, e.g., The Godfather",
+    "required": true
+  },
+  {
+    "id": "image",
+    "label": "Image URL",
+    "type": "url",
+    "placeholder": "Paste the movie poster URL",
+    "required": true
+  },
+  {
+    "id": "rating",
+    "label": "Rating",
+    "type": "number",
+    "step": "0.1",
+    "min": "0",
+    "max": "10",
+    "placeholder": "Enter a rating between 0 and 10",
+    "required": true
+  },
+  {
+    "id": "releaseDate",
+    "label": "Release Date",
+    "type": "date",
+    "required": true
+  },
+  {
+    "id": "description",
+    "label": "Description",
+    "type": "text",
+    "placeholder": "Write a short movie description",
+    "required": true
+  },
+  {
+    "id": "actors",
+    "label": "Actors",
+    "type": "text",
+    "placeholder": "Actors",
+    "required": true
+  },
+  {
+    "id": "director",
+    "label": "Director",
+    "type": "text",
+    "placeholder": "Enter the director's full name",
+    "required": true
+  },
+  {
+    "id": "genre",
+    "label": "Genre",
+    "type": "text",
+    "placeholder": "e.g., Action, Drama, Thriller",
+    "required": true
+  }
+]

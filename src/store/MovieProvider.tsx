@@ -1,17 +1,29 @@
 import React, { createContext, useEffect, useState } from "react";
 import { Movie } from "../types/Movie";
-import { LocalStorageKeys } from "../enums/LocalStorageKeys.ts";
+import { useLocation } from "react-router-dom";
 import { StoreType } from "../types/StoreType.ts";
+import { LocalStorageKeys } from "../enums/LocalStorageKeys.ts";
 
 export const MovieStore = createContext<StoreType>({
+  isEditMovie: null,
+  isFormOpen: false,
   favoritesMovies: [],
+  toggleMenu: () => {},
+  handleToEdit: () => {},
+  setIsFormOpen: () => {},
   toggleFavorite: () => {},
   isInFavorites: () => false,
   deleteFromFavorites: () => {},
 });
 
 export function MovieProvider({ children }) {
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  console.log("🚀 ~ MovieProvider ~ isFormOpen:", isFormOpen, isFormOpen);
+
+  const [isEditMovie, setIsEditMovie] = useState<Movie | null>(null);
   const [favoritesMovies, setFavoritesMovies] = useState<Movie[]>([]);
+
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const data = localStorage.getItem(LocalStorageKeys.FAVORITES);
@@ -21,8 +33,27 @@ export function MovieProvider({ children }) {
     }
   }, []);
 
+  useEffect(() => {
+    closeForm();
+  }, [pathname, setIsFormOpen]);
+
+  function closeForm() {
+    setIsFormOpen(false);
+    setIsEditMovie(null);
+  }
+
+  function toggleMenu() {
+    setIsEditMovie(null);
+    setIsFormOpen(!isFormOpen);
+  }
+
   function addToLocalStorage<T>(key: string, data: T): void {
     localStorage.setItem(key, JSON.stringify(data));
+  }
+
+  function handleToEdit(movie: Movie | null) {
+    setIsFormOpen(true);
+    setIsEditMovie((prevState) => (prevState ? null : movie));
   }
 
   function isInFavorites(movies: Movie[], idMovie: number): boolean {
@@ -33,7 +64,6 @@ export function MovieProvider({ children }) {
     setFavoritesMovies((prevFavorites) => {
       const updateMovies = prevFavorites.filter((mov) => mov.id !== id);
       addToLocalStorage(LocalStorageKeys.FAVORITES, updateMovies);
-
       return updateMovies;
     });
   }
@@ -46,12 +76,10 @@ export function MovieProvider({ children }) {
           (mov) => mov.id !== movie.id
         );
         addToLocalStorage(LocalStorageKeys.FAVORITES, updatedFavorites);
-
         return updatedFavorites;
       }
       const updatedFavorites = [...prevFavorites, movie];
       addToLocalStorage(LocalStorageKeys.FAVORITES, updatedFavorites);
-
       return updatedFavorites;
     });
   }
@@ -59,9 +87,14 @@ export function MovieProvider({ children }) {
   return (
     <MovieStore.Provider
       value={{
-        favoritesMovies,
-        toggleFavorite,
+        isFormOpen,
+        toggleMenu,
+        isEditMovie,
+        handleToEdit,
+        setIsFormOpen,
         isInFavorites,
+        toggleFavorite,
+        favoritesMovies,
         deleteFromFavorites,
       }}
     >

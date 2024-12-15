@@ -3,7 +3,7 @@ import { Loader } from "../UI/Loader.tsx";
 import { Movie } from "../../types/Movie.ts";
 import { NotFound } from "../UI/NotFound.tsx";
 import { useSearchParams } from "react-router-dom";
-import { useMovies } from "../../hooks/useMovies.ts";
+import { useGetMovies } from "../../hooks/useGetMovies.ts";
 import { ErrorMessage } from "../UI/ErrorMessage.tsx";
 import { MovieCard } from "../MovieCard/MovieCard.tsx";
 import { QueryParams } from "../../enums/QueryParams.ts";
@@ -16,7 +16,7 @@ type MoviesListProps = {
 
 export function MoviesList({ favoritesMovies = [] }: MoviesListProps) {
   const [searchParams] = useSearchParams();
-  const { data: movies, isLoading, error } = useMovies();
+  const { data: movies, isLoading, error } = useGetMovies();
 
   const movieList = favoritesMovies.length > 0 ? favoritesMovies : movies;
   const filterQuery = searchParams.get(QueryParams.query) || "";
@@ -29,9 +29,13 @@ export function MoviesList({ favoritesMovies = [] }: MoviesListProps) {
 
   return (
     <div className="grid grid-cols-[repeat(auto-fill,_minmax(250px,_1fr))] gap-5 w-full p-5">
-      {filterMovieList.map((movie: Movie) => (
-        <MovieCard key={movie.id} movie={movie} />
-      ))}
+      {filterMovieList.length ? (
+        filterMovieList.map((movie: Movie) => (
+          <MovieCard key={movie.id} movie={movie} />
+        ))
+      ) : (
+        <NotFound name={"Movies"} />
+      )}
     </div>
   );
 }

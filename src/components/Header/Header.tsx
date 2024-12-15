@@ -1,21 +1,16 @@
-import React, { useContext, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import React, { useContext } from "react";
+import { AddIcon } from "../UI/AddIcon.tsx";
 import { HeartIcon } from "../UI/HeartIcon.tsx";
+import { SideMenu } from "../SideMenu/SideMenu.tsx";
 import { Pathnames } from "../../enums/Pathnames.ts";
+import { NavLink, useLocation } from "react-router-dom";
 import { MovieStore } from "../../store/MovieProvider.tsx";
 import { MovieSearchInput } from "../MovieSearchInput/MovieSearchInput.tsx";
-import { AddIcon } from "../UI/AddIcon.tsx";
-import classNames from "classnames";
-import { Form } from "../Form/Form.tsx";
 
 export function Header() {
-  const [isFormOpen, setIsFormOpen] = useState(false);
-  const { favoritesMovies } = useContext(MovieStore);
+  const { favoritesMovies, isFormOpen, toggleMenu, isEditMovie } =
+    useContext(MovieStore);
   const { pathname } = useLocation();
-  console.log(isFormOpen);
-  function toggleMenu() {
-    setIsFormOpen(!isFormOpen);
-  }
 
   return (
     <>
@@ -55,25 +50,14 @@ export function Header() {
                   onClick={toggleMenu}
                   className="flex focus:outline-none"
                 >
-                  <AddIcon size={20} isActive={!isFormOpen} />
+                  <AddIcon size={20} isActive={isFormOpen} />
                 </button>
               </li>
             </ul>
           </nav>
         </div>
       </header>
-      <div
-        className={classNames(
-          "fixed z-10 h-full w-full bg-mainBack  duration-300 opacity-80 ease-in-out",
-          { "-translate-x-full": isFormOpen }
-        )}
-      >
-        <div className="flex items-center flex-col justify-center w-full h-full z-50">
-          <h2 className="text-yellow-400 text-2xl mb-4">Add New Movie</h2>
-
-          <Form />
-        </div>
-      </div>
+      <SideMenu isFormOpen={isFormOpen} movieToEdit={isEditMovie} />
     </>
   );
 }

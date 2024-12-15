@@ -3,15 +3,27 @@ import { Movie } from "../../types/Movie";
 import { Button } from "../UI/Button.tsx";
 import { HeartIcon } from "../UI/HeartIcon.tsx";
 import { MovieStore } from "../../store/MovieProvider.tsx";
+import { EditIcon } from "../UI/EditIcon.tsx";
+import { DeleteIcon } from "../UI/DeleteIcon.tsx";
+import { useDelete } from "../../hooks/useDelete.ts";
+import { useNavigate } from "react-router-dom";
 
 type DetailProps = {
   movie: Movie;
 };
 
 export function MovieDetails({ movie }: DetailProps) {
-  const { favoritesMovies, toggleFavorite, isInFavorites } =
+  const { favoritesMovies, toggleFavorite, isInFavorites, handleToEdit } =
     useContext(MovieStore);
+  const navigate = useNavigate();
   const isFavorites = isInFavorites(favoritesMovies, movie.id);
+
+  const { mutation, isLoading } = useDelete(movie.id);
+  
+  function handleToDelete() {
+    mutation.mutate();
+    navigate("/");
+  }
   return (
     <div>
       <div
@@ -34,7 +46,7 @@ export function MovieDetails({ movie }: DetailProps) {
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto bg-gradient-to-t from-[rgba(0,0,0,0.5)] to-transparent  p-8 rounded-lg  mt-8">
+      <div className="relative max-w-4xl mx-auto bg-gradient-to-t from-[rgba(0,0,0,0.5)] to-transparent  p-8 rounded-lg  mt-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
             <h2 className="text-3xl font-semibold mb-4">Description</h2>
@@ -63,6 +75,14 @@ export function MovieDetails({ movie }: DetailProps) {
               <p className="text-yellow-400 text-lg">{movie.rating}</p>
             </div>
           </div>
+        </div>
+        <div className="flex bottom-0 right-0 gap-2 m-4 absolute">
+          <Button onClick={() => handleToEdit(movie)}>
+            <EditIcon />
+          </Button>
+          <Button onClick={handleToDelete} disabled={isLoading}>
+            <DeleteIcon />
+          </Button>
         </div>
       </div>
     </div>

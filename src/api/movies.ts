@@ -21,8 +21,17 @@ export async function deleteMovie(id: number) {
   await axios.delete(`${BASE_URL}/${id}`);
 }
 
-export async function postMovie(newMovie: Movie) {
+export async function postMovie(newMovie: Omit<Movie, "id">) {
   const { data } = await axios.post(BASE_URL, newMovie);
 
   return data;
 }
+
+export const updateMovie = async (updatedMovie: Movie) => {
+  const response = await axios.patch(
+    `${BASE_URL}/${updatedMovie.id}`,
+    updatedMovie
+  );
+
+  return response.data;
+};

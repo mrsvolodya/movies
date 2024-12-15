@@ -8,25 +8,27 @@ import { Link } from "react-router-dom";
 import { MovieStore } from "../../store/MovieProvider.tsx";
 import { useDelete } from "../../hooks/useDelete.ts";
 import { Loader } from "../UI/Loader.tsx";
+import { ErrorMessage } from "../UI/ErrorMessage.tsx";
 
 interface MovieProps {
   movie: Movie;
 }
 
 export function MovieCard({ movie }: MovieProps) {
-  const { favoritesMovies, toggleFavorite, isInFavorites } =
+  const { favoritesMovies, toggleFavorite, isInFavorites, handleToEdit } =
     useContext(MovieStore);
 
-  const { mutation, isLoading } = useDelete(movie.id);
+  function handleToDelete() {
+    mutation.mutate();
+  }
+
+  const { mutation, isLoading, isError } = useDelete(movie.id);
   const isFavorites = isInFavorites(favoritesMovies, movie.id);
 
   return (
     <div className="group relative overflow-hidden rounded-lg border-transparent transition-all duration-300 hover:border-gray-300 hover:shadow-lg">
-      {isLoading && (
-        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10">
-          <Loader />
-        </div>
-      )}
+      {isLoading && <Loader />}
+      {isError && <ErrorMessage message={"Please try again."} />}
       <Link to={`/${movie.id}`}>
         <img
           key={movie.image}
@@ -46,18 +48,12 @@ export function MovieCard({ movie }: MovieProps) {
           <Button onClick={() => toggleFavorite(movie)}>
             <HeartIcon isFilled={isFavorites} />
           </Button>
-          <Button onClick={() => {}}>
+          <Button onClick={() => handleToEdit(movie)}>
             <EditIcon />
           </Button>
-          <Button onClick={() => mutation.mutate()} disabled={isLoading}>
+          <Button onClick={handleToDelete} disabled={isLoading}>
             <DeleteIcon />
           </Button>
-          {/* <Button
-            onClick={handleFavoriteClick}
-            extraClass="bg-gray-800 hover:bg-gray-700"
-          >
-            <CloseIcon isFilled={isFavorited} />
-          </Button> */}
         </div>
       </div>
     </div>
