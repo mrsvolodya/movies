@@ -7,6 +7,7 @@ import { ErrorMessage } from "../UI/ErrorMessage.tsx";
 import { Movie } from "../../types/Movie.ts";
 import fieldsData from "../../data/formFields.json";
 import { FormField } from "../../types/FormField.ts";
+
 type FormProps = {
   movieToEdit?: Movie | null;
 };
@@ -14,12 +15,12 @@ type FormProps = {
 const defaultValues = {
   title: "",
   image: "",
+  genre: "",
   rating: 0,
-  releaseDate: "",
-  description: "",
   actors: "",
   director: "",
-  genre: "",
+  description: "",
+  releaseDate: "",
 };
 
 export function Form({ movieToEdit }: FormProps) {
@@ -31,12 +32,12 @@ export function Form({ movieToEdit }: FormProps) {
       reset({
         title: movieToEdit.title,
         image: movieToEdit.image,
-        rating: movieToEdit.rating,
-        releaseDate: movieToEdit.releaseDate,
-        description: movieToEdit.description,
-        actors: movieToEdit.actors.join(","),
-        director: movieToEdit.director,
         genre: movieToEdit.genre,
+        rating: movieToEdit.rating,
+        director: movieToEdit.director,
+        description: movieToEdit.description,
+        releaseDate: movieToEdit.releaseDate,
+        actors: movieToEdit.actors.join(","),
       });
     }
   }, [movieToEdit, reset]);
@@ -61,7 +62,10 @@ export function Form({ movieToEdit }: FormProps) {
       {isLoading && <Loader />}
       {isError && <ErrorMessage message={"Please try again."} />}
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 text-white">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="space-y-4 text-white pb-24 overflow-y-auto max-h-[90vh]"
+      >
         {fields.map((field) => (
           <div key={field.id}>
             <label htmlFor={field.id} className={baseLabel}>
@@ -84,9 +88,11 @@ export function Form({ movieToEdit }: FormProps) {
         <button
           type="submit"
           disabled={isLoading}
-          className="bg-gray-800 hover:bg-slate-600 font-bold px-4 rounded w-full"
+          className={`bg-gray-800 hover:bg-slate-600 font-bold px-4 rounded w-full ${
+            isLoading ? "opacity-50 cursor-not-allowed" : ""
+          }`}
         >
-          Submit
+          {isLoading ? "Submitting..." : "Submit"}
         </button>
       </form>
     </div>

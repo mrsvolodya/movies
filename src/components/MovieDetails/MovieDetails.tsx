@@ -7,23 +7,28 @@ import { EditIcon } from "../UI/EditIcon.tsx";
 import { DeleteIcon } from "../UI/DeleteIcon.tsx";
 import { useDelete } from "../../hooks/useDelete.ts";
 import { useNavigate } from "react-router-dom";
-
+import { getMovieDetails } from "../../utils/movieDetails.ts";
 type DetailProps = {
   movie: Movie;
 };
 
 export function MovieDetails({ movie }: DetailProps) {
+  const navigate = useNavigate();
+  const { mutation, isLoading, isError } = useDelete(movie.id);
   const { favoritesMovies, toggleFavorite, isInFavorites, handleToEdit } =
     useContext(MovieStore);
-  const navigate = useNavigate();
-  const isFavorites = isInFavorites(favoritesMovies, movie.id);
 
-  const { mutation, isLoading } = useDelete(movie.id);
-  
   function handleToDelete() {
     mutation.mutate();
-    navigate("/");
+
+    if (!isError) {
+      navigate("/");
+    }
   }
+
+  const details = getMovieDetails(movie);
+
+  const isFavorites = isInFavorites(favoritesMovies, movie.id);
   return (
     <div>
       <div
@@ -39,6 +44,9 @@ export function MovieDetails({ movie }: DetailProps) {
             <Button
               onClick={() => toggleFavorite(movie)}
               extraClass="bg-gray-600 hover:scale-100"
+              aria-label={
+                isFavorites ? "Remove from favorites" : "Add to favorites"
+              }
             >
               <HeartIcon isFilled={isFavorites} />
             </Button>
@@ -54,26 +62,20 @@ export function MovieDetails({ movie }: DetailProps) {
           </div>
 
           <div className="space-y-6">
-            <div>
-              <p className="text-xl font-semibold">Actors</p>
-              <p>{movie.actors.join(",")}</p>
-            </div>
-            <div>
-              <p className="text-xl font-semibold">Director</p>
-              <p>{movie.director}</p>
-            </div>
-            <div>
-              <p className="text-xl font-semibold">Genre</p>
-              <p>{movie.genre}</p>
-            </div>
-            <div>
-              <p className="text-xl font-semibold">Release date</p>
-              <p>{movie.releaseDate}</p>
-            </div>
-            <div>
-              <p className="text-xl font-semibold">Rating</p>
-              <p className="text-yellow-400 text-lg">{movie.rating}</p>
-            </div>
+            {details.map(({ label, value }) => (
+              <div key={label} className="p-4 rounded-lg ">
+                <p className="text-xl font-semibold">{label}</p>
+                <p
+                  className={
+                    label === "Rating"
+                      ? "text-yellow-400 text-lg"
+                      : "text-gray-200"
+                  }
+                >
+                  {value}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
         <div className="flex bottom-0 right-0 gap-2 m-4 absolute">

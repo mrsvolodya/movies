@@ -1,16 +1,13 @@
 import React, { useContext } from "react";
-import { AddIcon } from "../UI/AddIcon.tsx";
-import { HeartIcon } from "../UI/HeartIcon.tsx";
+import { NavLink } from "react-router-dom";
 import { SideMenu } from "../SideMenu/SideMenu.tsx";
-import { Pathnames } from "../../enums/Pathnames.ts";
-import { NavLink, useLocation } from "react-router-dom";
+import { HeaderNav } from "../HeaderNav/HeaderNav.tsx";
 import { MovieStore } from "../../store/MovieProvider.tsx";
 import { MovieSearchInput } from "../MovieSearchInput/MovieSearchInput.tsx";
 
 export function Header() {
   const { favoritesMovies, isFormOpen, toggleMenu, isEditMovie } =
     useContext(MovieStore);
-  const { pathname } = useLocation();
 
   return (
     <>
@@ -26,35 +23,11 @@ export function Header() {
             <MovieSearchInput />
           </div>
 
-          <nav>
-            <ul className="flex text-center justify-center items-center ">
-              <li>
-                <NavLink to="/favorites">
-                  <div className="relative">
-                    <HeartIcon
-                      size={20}
-                      isActive={pathname === Pathnames.FAVORITES}
-                      color="white"
-                      isHeader
-                    />
-                    {favoritesMovies.length > 0 && (
-                      <span className="absolute flex items-center justify-center top-0 right-0 text-xs bg-red-600 rounded-full w-4 h-4">
-                        {favoritesMovies.length}
-                      </span>
-                    )}
-                  </div>
-                </NavLink>
-              </li>
-              <li>
-                <button
-                  onClick={toggleMenu}
-                  className="flex focus:outline-none"
-                >
-                  <AddIcon size={20} isActive={isFormOpen} />
-                </button>
-              </li>
-            </ul>
-          </nav>
+          <HeaderNav
+            favoritesCount={favoritesMovies.length}
+            toggleMenu={toggleMenu}
+            isFormOpen={isFormOpen}
+          />
         </div>
       </header>
       <SideMenu isFormOpen={isFormOpen} movieToEdit={isEditMovie} />

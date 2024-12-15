@@ -3,7 +3,7 @@ import { Loader } from "../UI/Loader.tsx";
 import { Movie } from "../../types/Movie.ts";
 import { NotFound } from "../UI/NotFound.tsx";
 import { useSearchParams } from "react-router-dom";
-import { useGetMovies } from "../../hooks/useGetMovies.ts";
+import { useFetchMovies } from "../../hooks/useFetchMovies.ts";
 import { ErrorMessage } from "../UI/ErrorMessage.tsx";
 import { MovieCard } from "../MovieCard/MovieCard.tsx";
 import { QueryParams } from "../../enums/QueryParams.ts";
@@ -16,7 +16,7 @@ type MoviesListProps = {
 
 export function MoviesList({ favoritesMovies = [] }: MoviesListProps) {
   const [searchParams] = useSearchParams();
-  const { data: movies, isLoading, error } = useGetMovies();
+  const { data: movies, isLoading, error } = useFetchMovies();
 
   const movieList = favoritesMovies.length > 0 ? favoritesMovies : movies;
   const filterQuery = searchParams.get(QueryParams.query) || "";

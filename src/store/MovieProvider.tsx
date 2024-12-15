@@ -18,8 +18,6 @@ export const MovieStore = createContext<StoreType>({
 
 export function MovieProvider({ children }) {
   const [isFormOpen, setIsFormOpen] = useState(false);
-  console.log("🚀 ~ MovieProvider ~ isFormOpen:", isFormOpen, isFormOpen);
-
   const [isEditMovie, setIsEditMovie] = useState<Movie | null>(null);
   const [favoritesMovies, setFavoritesMovies] = useState<Movie[]>([]);
 

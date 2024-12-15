@@ -12,12 +12,12 @@ export function SideMenu({ isFormOpen, movieToEdit }: SideMenuProps) {
   return (
     <div
       className={classNames(
-        "fixed z-20 h-full w-full bg-mainBack translate-x-full duration-300 opacity-80 ease-in-out",
-        { "translate-x-0": isFormOpen }
+        "fixed z-20 h-full w-full bg-mainBack translate-x-full duration-300 opacity-90 ease-in-out overflow-y-auto",
+        { "-translate-x-0": isFormOpen }
       )}
     >
-      <div className="flex items-center flex-col justify-center w-full h-full z-50">
-        <h2 className="text-yellow-400 text-2xl mb-4">
+      <div className="flex items-center flex-col justify-center w-full min-h-full z-50">
+        <h2 className="text-yellow-400 text-2xl mb-2">
           {movieToEdit ? "Edit movie" : "Add New Movie"}
         </h2>
         <Form movieToEdit={movieToEdit} />
