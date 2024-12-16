@@ -12,8 +12,11 @@ export function SideMenu({ isFormOpen, movieToEdit }: SideMenuProps) {
   return (
     <div
       className={classNames(
-        "fixed z-20 h-full w-full bg-mainBack translate-x-full duration-300 opacity-90 ease-in-out overflow-y-auto",
-        { "-translate-x-0": isFormOpen }
+        "fixed z-20 h-full w-full bg-mainBack duration-300 opacity-90 ease-in-out overflow-y-auto",
+        {
+          "translate-x-full": !isFormOpen,
+          "-translate-x-0": isFormOpen,
+        }
       )}
     >
       <div className="flex items-center flex-col justify-center w-full min-h-full z-50">

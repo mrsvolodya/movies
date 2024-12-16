@@ -19,7 +19,7 @@ export function MovieSearchInput() {
         value={filterQuery}
         onChange={(e) => handleInputQuery(e)}
         placeholder="Search for movies..."
-        className="placeholder:text-sm sm:placeholder:text-lg w-full px-2 text-2 bg-mainBack rounded-lg border border-gray-300 focus:outline-none focus:ring-1 md:focus:ring-2 md:text-lg focus:ring-blue-500 focus:border-blue-500 shadow-md hover:shadow-lg"
+        className="placeholder:text-sm sm:placeholder:text-lg w-full px-2 text-2 bg-mainBack rounded-lg border border-gray-300 focus:outline-none focus:ring-1 md:focus:ring-1 md:text-lg focus:ring-blue-500 focus:border-blue-500 shadow-md hover:shadow-lg hover:border-yellow-500"
       />
     </div>
   );

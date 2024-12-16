@@ -8,6 +8,7 @@ import { DeleteIcon } from "../UI/DeleteIcon.tsx";
 import { useDelete } from "../../hooks/useDelete.ts";
 import { useNavigate } from "react-router-dom";
 import { getMovieDetails } from "../../utils/movieDetails.ts";
+
 type DetailProps = {
   movie: Movie;
 };
