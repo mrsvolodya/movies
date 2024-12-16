@@ -61,9 +61,9 @@ export function MovieDetails({ movie }: DetailProps) {
             <p className="text-gray-300 text-lg">{movie.description}</p>
           </div>
 
-          <div className="space-y-6">
+          <div>
             {details.map(({ label, value }) => (
-              <div key={label} className="p-4 rounded-lg ">
+              <div key={label} className="p-3 rounded-lg ">
                 <p className="text-xl font-semibold">{label}</p>
                 <p
                   className={

@@ -15,3 +15,7 @@ Create a React web application that allows users to store and manage a list of m
 ○ Ability to edit existing movies.
 ○ The ability to delete movies.
 ○ Ability to add a movie to your favourites
+
+
+напиши інструкцію як запускати проект локально для перевірки тестового завдання
+я використав JSON SERVER, також застосував useSearchParams, застосував пошук за title з використанням ruseDebounce, для кушукання використав Tanstack query, також використав react-hook-form для кращої форми, для стилізації використав Tailwind, для збереження стану Context API, ТАКОЖ ЗАСТОСУВАВ TypeSctipt, додав всі можливі hover effect і використав svg для гарнішої стилізації і консистенції по ui ux.
