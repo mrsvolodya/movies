@@ -4,6 +4,7 @@ import { Movie } from "./Movie";
 export type StoreType = {
   isEditMovie: Movie | null;
   isFormOpen: boolean;
+  closeForm: () => void;
   favoritesMovies: Movie[];
   setIsFormOpen: (v: boolean) => void;
   toggleFavorite: (movie: Movie) => void;

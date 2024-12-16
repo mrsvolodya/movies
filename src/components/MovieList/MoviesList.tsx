@@ -1,10 +1,10 @@
 import React from "react";
-import { Loader } from "../UI/Loader.tsx";
+import { Loader } from "../common/Loader.tsx";
 import { Movie } from "../../types/Movie.ts";
-import { NotFound } from "../UI/NotFound.tsx";
+import { NotFound } from "../common/NotFound.tsx";
 import { useSearchParams } from "react-router-dom";
 import { useFetchMovies } from "../../hooks/useFetchMovies.ts";
-import { ErrorMessage } from "../UI/ErrorMessage.tsx";
+import { ErrorMessage } from "../common/ErrorMessage.tsx";
 import { MovieCard } from "../MovieCard/MovieCard.tsx";
 import { QueryParams } from "../../enums/QueryParams.ts";
 import { useDebounce } from "../../hooks/useDebounce.ts";
@@ -21,7 +21,7 @@ export function MoviesList({ favoritesMovies = [] }: MoviesListProps) {
   const movieList = favoritesMovies.length > 0 ? favoritesMovies : movies;
   const filterQuery = searchParams.get(QueryParams.query) || "";
   const debounceQuery = useDebounce(filterQuery);
-  const filterMovieList = useFilterByQuery(movieList, debounceQuery);
+  const filterMovieList = useFilterByQuery(movieList ?? [], debounceQuery);
 
   if (isLoading) return <Loader />;
   if (!movies) return <NotFound name="Movies" />;

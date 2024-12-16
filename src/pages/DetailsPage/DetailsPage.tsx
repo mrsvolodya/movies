@@ -1,15 +1,15 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useDetails } from "../../hooks/useDetails.ts";
-import { Loader } from "../../components/UI/Loader.tsx";
-import { NotFound } from "../../components/UI/NotFound.tsx";
+import { useMovie } from "../../hooks/useMovie.ts";
+import { Loader } from "../../components/common/Loader.tsx";
+import { NotFound } from "../../components/common/NotFound.tsx";
 import { Header } from "../../components/Header/Header.tsx";
-import { ErrorMessage } from "../../components/UI/ErrorMessage.tsx";
+import { ErrorMessage } from "../../components/common/ErrorMessage.tsx";
 import { MovieDetails } from "../../components/MovieDetails/MovieDetails.tsx";
 
 export function DetailsPage() {
   const { id } = useParams<{ id: string }>();
-  const { data: movie, isLoading, error } = useDetails(id || "");
+  const { data: movie, isLoading, error } = useMovie(id || "");
 
   if (isLoading) return <Loader />;
   if (!movie) return <NotFound name="Movie" />;
@@ -18,7 +18,7 @@ export function DetailsPage() {
   }
 
   return (
-    <div className="bg-mainBack min-h-screen text-white">
+    <div className="bg-mainBack min-h-screen text-white custom-scrollbar overflow-x-hidden h-[96px]">
       <Header />
       <MovieDetails movie={movie} />
     </div>

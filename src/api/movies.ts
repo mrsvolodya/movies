@@ -5,14 +5,14 @@ const BASE_URL = "http://localhost:5000/movies";
 
 export async function fetchMovies() {
   const url = BASE_URL;
-  const { data } = await axios.get(url);
+  const { data } = await axios.get<Movie[]>(url);
 
   return data;
 }
 
 export async function fetchMovie(id: string) {
   const url = `${BASE_URL}/${id}`;
-  const { data } = await axios.get(url);
+  const { data } = await axios.get<Movie>(url);
 
   return data;
 }
@@ -22,16 +22,9 @@ export async function deleteMovie(id: number) {
 }
 
 export async function postMovie(newMovie: Omit<Movie, "id">) {
-  const { data } = await axios.post(BASE_URL, newMovie);
-
-  return data;
+  return axios.post<Movie>(BASE_URL, newMovie);
 }
 
-export const updateMovie = async (updatedMovie: Movie) => {
-  const response = await axios.patch(
-    `${BASE_URL}/${updatedMovie.id}`,
-    updatedMovie
-  );
-
-  return response.data;
-};
+export async function updateMovie(updatedMovie: Movie) {
+  return axios.patch(`${BASE_URL}/${updatedMovie.id}`, updatedMovie);
+}

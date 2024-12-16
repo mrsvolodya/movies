@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { MovieStore } from "../../store/MovieProvider.tsx";
-import { NotFound } from "../../components/UI/NotFound.tsx";
+import { NotFound } from "../../components/common/NotFound.tsx";
 import { Header } from "../../components/Header/Header.tsx";
 import { MoviesList } from "../../components/MovieList/MoviesList.tsx";
 

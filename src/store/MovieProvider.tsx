@@ -8,6 +8,7 @@ export const MovieStore = createContext<StoreType>({
   isEditMovie: null,
   isFormOpen: false,
   favoritesMovies: [],
+  closeForm: () => {},
   toggleMenu: () => {},
   handleToEdit: () => {},
   setIsFormOpen: () => {},
@@ -85,6 +86,7 @@ export function MovieProvider({ children }) {
   return (
     <MovieStore.Provider
       value={{
+        closeForm,
         isFormOpen,
         toggleMenu,
         isEditMovie,

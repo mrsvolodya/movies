@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import { Form } from "../Form/Form.tsx";
+import { AddEditForm } from "../AddEditForm/AddEditForm.tsx";
 import { Movie } from "../../types/Movie.ts";
 
 type SideMenuProps = {
@@ -23,7 +23,7 @@ export function SideMenu({ isFormOpen, movieToEdit }: SideMenuProps) {
         <h2 className="text-yellow-400 text-2xl mb-2">
           {movieToEdit ? "Edit movie" : "Add New Movie"}
         </h2>
-        <Form movieToEdit={movieToEdit} />
+        <AddEditForm movieToEdit={movieToEdit} />
       </div>
     </div>
   );

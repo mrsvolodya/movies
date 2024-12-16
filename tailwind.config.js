@@ -14,8 +14,6 @@ module.exports = {
       },
       colors: {
         mainBack: "#141414",
-        secondTextColor: "#05c2df",
-        thirdTextColor: "#929292",
       },
     },
   },

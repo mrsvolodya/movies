@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 import { Movie } from "../../types/Movie.ts";
-import { HeartIcon } from "../UI/HeartIcon.tsx";
-import { Button } from "../UI/Button.tsx";
-import { EditIcon } from "../UI/EditIcon.tsx";
-import { DeleteIcon } from "../UI/DeleteIcon.tsx";
+import { HeartIcon } from "../common/HeartIcon.tsx";
+import { Button } from "../common/Button.tsx";
+import { EditIcon } from "../common/EditIcon.tsx";
+import { DeleteIcon } from "../common/DeleteIcon.tsx";
 import { Link } from "react-router-dom";
 import { MovieStore } from "../../store/MovieProvider.tsx";
 import { useDelete } from "../../hooks/useDelete.ts";
-import { Loader } from "../UI/Loader.tsx";
-import { ErrorMessage } from "../UI/ErrorMessage.tsx";
+import { Loader } from "../common/Loader.tsx";
+import { ErrorMessage } from "../common/ErrorMessage.tsx";
 
 interface MovieProps {
   movie: Movie;
@@ -18,11 +18,12 @@ export function MovieCard({ movie }: MovieProps) {
   const { favoritesMovies, toggleFavorite, isInFavorites, handleToEdit } =
     useContext(MovieStore);
 
-  function handleToDelete() {
+  const { mutation, isLoading, isError } = useDelete(movie.id);
+
+  function handleDelete() {
     mutation.mutate();
   }
 
-  const { mutation, isLoading, isError } = useDelete(movie.id);
   const isFavorites = isInFavorites(favoritesMovies, movie.id);
 
   return (
@@ -51,7 +52,7 @@ export function MovieCard({ movie }: MovieProps) {
           <Button onClick={() => handleToEdit(movie)}>
             <EditIcon />
           </Button>
-          <Button onClick={handleToDelete} disabled={isLoading}>
+          <Button onClick={handleDelete} disabled={isLoading}>
             <DeleteIcon />
           </Button>
         </div>

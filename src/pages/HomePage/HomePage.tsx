@@ -9,7 +9,6 @@ export function HomePage() {
       <main>
         <MoviesList />
       </main>
-      <footer></footer>
     </div>
   );
 }
