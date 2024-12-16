@@ -31,21 +31,6 @@
       "genre": "Drama, Romance"
     },
     {
-      "id": "7",
-      "title": "The Matrix",
-      "image": "https://m.media-amazon.com/images/M/MV5BN2NmN2VhMTQtMDNiOS00NDlhLTliMjgtODE2ZTY0ODQyNDRhXkEyXkFqcGc@._V1_FMjpg_UY3156_.jpg",
-      "rating": 8.7,
-      "releaseDate": "1999-03-31",
-      "description": "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.",
-      "actors": [
-        "Keanu Reeves",
-        "Laurence Fishburne",
-        "Carrie-Anne Moss"
-      ],
-      "director": "The Wachowskis",
-      "genre": "Action, Science Fiction"
-    },
-    {
       "id": "8",
       "title": "Fight Club",
       "image": "https://m.media-amazon.com/images/M/MV5BOTgyOGQ1NDItNGU3Ny00MjU3LTg2YWEtNmEyYjBiMjI1Y2M5XkEyXkFqcGc@._V1_FMjpg_UX1066_.jpg",

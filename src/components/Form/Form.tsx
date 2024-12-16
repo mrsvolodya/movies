@@ -64,7 +64,7 @@ export function Form({ movieToEdit }: FormProps) {
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="space-y-4 text-white pb-24 overflow-y-auto max-h-[90vh]"
+        className="space-y-4 text-white pb-24 px-4 overflow-y-auto max-h-[90vh] custom-scrollbar"
       >
         {fields.map((field) => (
           <div key={field.id}>
@@ -88,7 +88,7 @@ export function Form({ movieToEdit }: FormProps) {
         <button
           type="submit"
           disabled={isLoading}
-          className={`bg-gray-800 hover:bg-slate-600 font-bold px-4 rounded w-full ${
+          className={`bg-gray-600 hover:bg-slate-800 font-bold px-4 rounded w-full transition-color duration-300${
             isLoading ? "opacity-50 cursor-not-allowed" : ""
           }`}
         >
