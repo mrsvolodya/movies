@@ -15,11 +15,19 @@ This project is a **Movie Database Web Application** built using **React** and *
 - **Data Management**: Uses **Tanstack Query** for data fetching and caching.
 - **State Management**: Global state management with **Context API**.
 - **Routing**: Smooth navigation using **React Router DOM**.
-- **API Simulation**: **JSON Server** is used for simulating a backend API for movie data storage.
+
+## Backend API
+
+- **The backend is built using Node.js with Express and provides a RESTful API for managing movie data. It supports the following endpoints:**
+
+- **GET** /movies - Fetch all movies.
+- **GET** /movies/:id - Fetch details of a specific movie.
+- **POST** /movies - Add a new movie.
+- **PATCH** /movies/:id - Update an existing movie.
+- **DELETE** /movies/:id - Delete a movie.
+- **I developed the backend part of this application entirely on my own using Node.js and Express. I used Render's dashboard for deployment to make the backend accessible online and ensure smooth integration with the frontend.**
 
 ## Technologies Used
-
-This project utilizes the following technologies:
 
 - **React**: JavaScript library for building user interfaces.
 - **TypeScript**: Adds type safety for better development experience.
@@ -30,7 +38,6 @@ This project utilizes the following technologies:
 - **Context API**: For global state management.
 - **SVG Icons**: Custom icons for consistent UI design.
 - **Axios**: For making HTTP requests to the backend.
-- **JSON Server**: Mock API server for simulating backend data.
 - **ruseDebounce**: Optimizes search functionality by debouncing user input.
 - **@headlessui/react**: Provides accessible UI components.
 
@@ -40,4 +47,4 @@ git clone https://github.com/mrsvolodya/movies.git
 npm install
 npm start
 
-## Your app should now be running at http://localhost:3000
+## You can view a live preview of the projec here: https://mrsvolodya.github.io/movies/
