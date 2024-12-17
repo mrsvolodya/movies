@@ -16,7 +16,7 @@ This project is a **Movie Database Web Application** built using **React** and *
 - **State Management**: Global state management with **Context API**.
 - **Routing**: Smooth navigation using **React Router DOM**.
 
-## Backend API
+## Create Backend API for Movie DB
 
 - **The backend is built using Node.js with Express and provides a RESTful API for managing movie data. It supports the following endpoints:**
 
