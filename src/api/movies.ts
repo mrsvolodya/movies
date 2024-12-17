@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Movie } from "../types/Movie";
 
-const BASE_URL = "http://localhost:5000/movies";
+const BASE_URL = "https://movies-backend-qzuk.onrender.com/movies";
 
 export async function fetchMovies() {
   const url = BASE_URL;

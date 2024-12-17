@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { SideMenu } from "../SideMenu/SideMenu.tsx";
 import { HeaderNav } from "../HeaderNav/HeaderNav.tsx";
 import { MovieStore } from "../../store/MovieProvider.tsx";
@@ -8,6 +8,8 @@ import { MovieSearchInput } from "../MovieSearchInput/MovieSearchInput.tsx";
 export function Header() {
   const { favoritesMovies, isFormOpen, toggleMenu, isEditMovie } =
     useContext(MovieStore);
+
+  const { id } = useParams();
 
   return (
     <>
@@ -24,7 +26,7 @@ export function Header() {
           </div>
 
           <div className="order-1 w-full lg:-order-none sm:-order-none sm:max-w-fit ">
-            <MovieSearchInput />
+            {!id && <MovieSearchInput />}
           </div>
 
           <HeaderNav

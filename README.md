@@ -38,7 +38,6 @@ This project utilizes the following technologies:
 
 git clone https://github.com/mrsvolodya/movies.git
 npm install
-npm run server
 npm start
 
 ## Your app should now be running at http://localhost:3000
