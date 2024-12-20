@@ -26,8 +26,6 @@ export function MovieCard({ movie }: MovieProps) {
 
   const isFavorites = isInFavorites(favoritesMovies, movie.id);
 
-  console.log(isFavorites);
-
   return (
     <div className="group relative overflow-hidden rounded-lg border-transparent transition-all duration-300 hover:border-gray-300 hover:shadow-lg">
       {isLoading && <Loader />}
