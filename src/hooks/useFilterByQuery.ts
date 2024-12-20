@@ -6,7 +6,7 @@ export function useFilterByQuery(movies: Movie[], filterQuery: string) {
     if (!movies) return [];
 
     return movies.filter((movie) =>
-      movie.title.toLocaleLowerCase().includes(filterQuery)
+      movie.title.toLowerCase().includes(filterQuery.toLowerCase())
     );
   }, [movies, filterQuery]);
 }
