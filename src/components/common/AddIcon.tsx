@@ -2,7 +2,7 @@ import React from "react";
 import { IconProps } from "../../types/IconProps";
 
 export function AddIcon({
-  isFilled = false,
+  isFilled = null,
   size = 24,
   color = "white",
   isActive = false,

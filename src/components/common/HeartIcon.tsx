@@ -2,7 +2,7 @@ import React from "react";
 import { IconProps } from "../../types/IconProps";
 
 export function HeartIcon({
-  isFilled = false,
+  isFilled = null,
   size = 24,
   color = "red",
   isActive = false,

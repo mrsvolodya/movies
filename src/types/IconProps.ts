@@ -1,5 +1,7 @@
+import { Movie } from "./Movie";
+
 export type IconProps = {
-  isFilled?: boolean;
+  isFilled?: Movie | null;
   size?: number;
   color?: string;
   isActive?: boolean;

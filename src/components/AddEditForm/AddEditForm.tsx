@@ -6,6 +6,8 @@ import { Loader } from "../common/Loader.tsx";
 import { ErrorMessage } from "../common/ErrorMessage.tsx";
 import { Movie } from "../../types/Movie.ts";
 import { MovieStore } from "../../store/MovieProvider.tsx";
+import { AddNewMovie } from "../../types/AddNewMovie.ts";
+import { useKeyListener } from "../../hooks/useKeyListener.ts";
 
 type FormProps = {
   movieToEdit?: Movie | null;
@@ -28,7 +30,7 @@ const buttonDisabledClass = "opacity-50 cursor-not-allowed";
 const buttonClass = `bg-gray-600 hover:bg-slate-800 font-bold px-4 rounded w-full transition-color duration-300`;
 
 export function AddEditForm({ movieToEdit }: FormProps) {
-  const { closeForm } = useContext(MovieStore);
+  const { closeForm, updateFavFromEditMovie } = useContext(MovieStore);
   const { register, handleSubmit, reset } = useForm<FormValues>();
   const { movieMutation, isLoading, isError } = useMovieMutation();
 
@@ -52,13 +54,18 @@ export function AddEditForm({ movieToEdit }: FormProps) {
     reset(defaultValues);
   }
 
+  useKeyListener({ key: "Escape", handler: handleCancel });
+
   function onSubmit(data: FormValues) {
     const actorsArray = data.actors.split(",");
-    const updateNewMovie = { ...data, actors: actorsArray };
+    const addNewMovie: AddNewMovie = { ...data, actors: actorsArray };
+    let updatedMovie = { ...addNewMovie, id: movieToEdit?.id };
 
-    movieMutation.mutate(
-      movieToEdit ? { ...updateNewMovie, id: movieToEdit.id } : updateNewMovie
-    );
+    if (movieToEdit) {
+      updateFavFromEditMovie(updatedMovie as Movie);
+    }
+
+    movieMutation.mutate(movieToEdit ? updatedMovie : addNewMovie);
     reset(defaultValues);
   }
 
@@ -104,9 +111,9 @@ export function AddEditForm({ movieToEdit }: FormProps) {
           <input
             id="rating"
             type="number"
-            step="0.1"
-            min="0"
-            max="10"
+            step={0.1}
+            min={0}
+            max={10}
             placeholder="Enter a rating between 0 and 10"
             className={baseInputClass}
             {...register("rating", {

@@ -20,8 +20,7 @@ This project is a **Movie Database Web Application** built using **React** and *
 
 - **The backend is built using Node.js with Express and provides a RESTful API for managing movie data. It supports the following endpoints:**
 
-- **GET** /movies - Fetch all movies.
-- **GET** /movies/:id - Fetch details of a specific movie.
+- **GET** /movies - Fetch all movies or /movies/:id - Fetch details of a specific movie.
 - **POST** /movies - Add a new movie.
 - **PATCH** /movies/:id - Update an existing movie.
 - **DELETE** /movies/:id - Delete a movie.

@@ -13,11 +13,10 @@ export async function fetchMovies() {
 export async function fetchMovie(id: string) {
   const url = `${BASE_URL}/${id}`;
   const { data } = await axios.get<Movie>(url);
-
   return data;
 }
 
-export async function deleteMovie(id: number) {
+export async function deleteMovie(id: string) {
   await axios.delete(`${BASE_URL}/${id}`);
 }
 
@@ -26,5 +25,5 @@ export async function postMovie(newMovie: Omit<Movie, "id">) {
 }
 
 export async function updateMovie(updatedMovie: Movie) {
-  return axios.patch(`${BASE_URL}/${updatedMovie.id}`, updatedMovie);
+  return axios.put(`${BASE_URL}/${updatedMovie.id}`, updatedMovie);
 }

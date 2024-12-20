@@ -13,8 +13,9 @@ export const MovieStore = createContext<StoreType>({
   handleToEdit: () => {},
   setIsFormOpen: () => {},
   toggleFavorite: () => {},
-  isInFavorites: () => false,
+  isInFavorites: () => null,
   deleteFromFavorites: () => {},
+  updateFavFromEditMovie: () => {},
 });
 
 export function MovieProvider({ children }) {
@@ -25,10 +26,14 @@ export function MovieProvider({ children }) {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    const data = localStorage.getItem(LocalStorageKeys.FAVORITES);
-    if (data) {
-      const parseData = JSON.parse(data);
-      setFavoritesMovies(parseData);
+    try {
+      const data = localStorage.getItem(LocalStorageKeys.FAVORITES);
+      if (data) {
+        const parseData = JSON.parse(data);
+        setFavoritesMovies(parseData);
+      }
+    } catch (error) {
+      console.error("Failed to parse favorites from localStorage", error);
     }
   }, []);
 
@@ -52,35 +57,39 @@ export function MovieProvider({ children }) {
 
   function handleToEdit(movie: Movie | null) {
     setIsFormOpen(true);
-    setIsEditMovie((prevState) => (prevState ? null : movie));
+    setIsEditMovie(movie);
   }
 
-  function isInFavorites(movies: Movie[], idMovie: number): boolean {
-    return movies.some((mov) => mov.id === idMovie);
+  function isInFavorites(movies: Movie[], idMovie: string) {
+    return movies.find((mov) => mov.id === idMovie) || null;
   }
 
-  function deleteFromFavorites(id: number) {
+  function updateFavorites(updater: (movies: Movie[]) => Movie[]) {
     setFavoritesMovies((prevFavorites) => {
-      const updateMovies = prevFavorites.filter((mov) => mov.id !== id);
-      addToLocalStorage(LocalStorageKeys.FAVORITES, updateMovies);
-      return updateMovies;
-    });
-  }
-
-  function toggleFavorite(movie: Movie) {
-    setFavoritesMovies((prevFavorites) => {
-      const isFavorite = isInFavorites(prevFavorites, movie.id);
-      if (isFavorite) {
-        const updatedFavorites = prevFavorites.filter(
-          (mov) => mov.id !== movie.id
-        );
-        addToLocalStorage(LocalStorageKeys.FAVORITES, updatedFavorites);
-        return updatedFavorites;
-      }
-      const updatedFavorites = [...prevFavorites, movie];
+      const updatedFavorites = updater(prevFavorites);
       addToLocalStorage(LocalStorageKeys.FAVORITES, updatedFavorites);
       return updatedFavorites;
     });
+  }
+
+  function deleteFromFavorites(id: string) {
+    updateFavorites((movies) => movies.filter((mov) => mov.id !== id));
+  }
+
+  function updateFavFromEditMovie(updatedMovie: Movie) {
+    updateFavorites((movies) =>
+      movies.map((movie) =>
+        movie.id === updatedMovie.id ? updatedMovie : movie
+      )
+    );
+  }
+
+  function toggleFavorite(movie: Movie) {
+    updateFavorites((movies) =>
+      isInFavorites(movies, movie.id)
+        ? movies.filter((mov) => mov.id !== movie.id)
+        : [...movies, movie]
+    );
   }
 
   return (
@@ -96,6 +105,7 @@ export function MovieProvider({ children }) {
         toggleFavorite,
         favoritesMovies,
         deleteFromFavorites,
+        updateFavFromEditMovie,
       }}
     >
       {children}

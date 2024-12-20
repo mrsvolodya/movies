@@ -8,7 +8,7 @@ import { QueryKeys } from "../enums/QueryKeys.ts";
 import { useContext } from "react";
 import { MovieStore } from "../store/MovieProvider.tsx";
 
-export function useDelete(id: number) {
+export function useDelete(id: string) {
   const { deleteFromFavorites } = useContext(MovieStore);
   const queryClient = useQueryClient();
 

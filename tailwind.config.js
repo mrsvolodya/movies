@@ -17,5 +17,14 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addBase }) {
+      addBase({
+        "*:focus-visible": {
+          outline: "none",
+          boxShadow: "none",
+        },
+      });
+    },
+  ],
 };
