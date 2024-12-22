@@ -14,7 +14,8 @@
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.1",
     "react-router-dom": "^7.0.2",
-    "react-scripts": "5.0.1"
+    "react-scripts": "^5.0.1",
+    "typescript": "^3.9.10"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -44,6 +45,7 @@
     ]
   },
   "devDependencies": {
+    "@hookform/devtools": "^4.3.3",
     "@tanstack/eslint-plugin-query": "^5.62.1",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.2",

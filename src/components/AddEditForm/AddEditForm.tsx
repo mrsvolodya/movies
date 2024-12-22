@@ -8,6 +8,7 @@ import { Movie } from "../../types/Movie.ts";
 import { MovieStore } from "../../store/MovieProvider.tsx";
 import { AddNewMovie } from "../../types/AddNewMovie.ts";
 import { useKeyListener } from "../../hooks/useKeyListener.ts";
+import { DevTool } from "@hookform/devtools";
 
 type FormProps = {
   movieToEdit?: Movie | null;
@@ -31,7 +32,7 @@ const buttonClass = `bg-gray-600 hover:bg-slate-800 font-bold px-4 rounded w-ful
 
 export function AddEditForm({ movieToEdit }: FormProps) {
   const { closeForm, updateFavFromEditMovie } = useContext(MovieStore);
-  const { register, handleSubmit, reset } = useForm<FormValues>();
+  const { register, control, handleSubmit, reset } = useForm<FormValues>();
   const { movieMutation, isLoading, isError } = useMovieMutation();
 
   useEffect(() => {
@@ -203,6 +204,7 @@ export function AddEditForm({ movieToEdit }: FormProps) {
           </button>
         </div>
       </form>
+      <DevTool control={control} />
     </div>
   );
 }

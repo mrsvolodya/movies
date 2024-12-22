@@ -46,4 +46,6 @@ git clone https://github.com/mrsvolodya/movies.git
 npm install
 npm start
 
-## You can view a live preview of the projec here: https://mrsvolodya.github.io/movies/
+## Note: The backend for this application is hosted on the free version of Render's dashboard. While this ensures the backend is accessible online, free instances on Render can go into a "sleep mode" when inactive. As a result, the first request after a period of inactivity may take up to 50 seconds or more to respond. Subsequent requests will process without delays.
+
+## You can view a live preview of the project here: https://mrsvolodya.github.io/movies/
