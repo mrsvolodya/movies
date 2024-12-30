@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 import { Movie } from "../../types/Movie.ts";
-import { HeartIcon } from "../common/HeartIcon.tsx";
-import { Button } from "../common/Button.tsx";
-import { EditIcon } from "../common/EditIcon.tsx";
-import { DeleteIcon } from "../common/DeleteIcon.tsx";
+import { HeartIcon } from "../Common/HeartIcon.tsx";
+import { Button } from "../Common/Button.tsx";
+import { EditIcon } from "../Common/EditIcon.tsx";
+import { DeleteIcon } from "../Common/DeleteIcon.tsx";
 import { Link } from "react-router-dom";
 import { MovieStore } from "../../store/MovieProvider.tsx";
-import { useDelete } from "../../hooks/useDelete.ts";
-import { Loader } from "../common/Loader.tsx";
-import { ErrorMessage } from "../common/ErrorMessage.tsx";
+import { useDeleteMovieMutation } from "../../hooks/useDeleteMovieMutation.ts";
+import { Loader } from "../Common/Loader.tsx";
+import { ErrorMessage } from "../Common/ErrorMessage.tsx";
 
 interface MovieProps {
   movie: Movie;
@@ -18,7 +18,7 @@ export function MovieCard({ movie }: MovieProps) {
   const { favoritesMovies, toggleFavorite, isInFavorites, handleToEdit } =
     useContext(MovieStore);
 
-  const { mutation, isLoading, isError } = useDelete(movie.id);
+  const { mutation, isLoading, isError } = useDeleteMovieMutation(movie.id);
 
   function handleDelete() {
     mutation.mutate();

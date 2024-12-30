@@ -3,23 +3,18 @@ import {
   useQueryClient,
   InvalidateQueryFilters,
 } from "@tanstack/react-query";
-import { postMovie, updateMovie } from "../api/movies.ts";
+import { CreateMovie } from "../types/CreateMovie.ts";
+import { postMovie } from "../api/movies.ts";
 import { QueryKeys } from "../enums/QueryKeys.ts";
 import { useContext } from "react";
 import { MovieStore } from "../store/MovieProvider.tsx";
 
-export function useMovieMutation() {
+export function useCreateMovieMutation() {
   const queryClient = useQueryClient();
   const { setIsFormOpen } = useContext(MovieStore);
 
-  const movieMutation = useMutation({
-    mutationFn: (movieData: any) => {
-      if (movieData.id) {
-        return updateMovie(movieData);
-      } else {
-        return postMovie(movieData);
-      }
-    },
+  const createMovie = useMutation({
+    mutationFn: (movieData: CreateMovie) => postMovie(movieData),
     onSuccess: () => {
       queryClient.invalidateQueries([
         QueryKeys.ALL_MOVIES,
@@ -27,12 +22,12 @@ export function useMovieMutation() {
       setIsFormOpen(false);
     },
     onError: (error) => {
-      console.error("Error in movie mutation:", error);
+      throw new Error(`Error update movie ${error}`);
     },
   });
 
-  const isLoading = movieMutation.status === "pending";
-  const isError = movieMutation.status === "error";
+  const isLoading = createMovie.status === "pending";
+  const isError = createMovie.status === "error";
 
-  return { movieMutation, isLoading, isError };
+  return { createMovie, isError, isLoading };
 }

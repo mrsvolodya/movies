@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { Movie } from "../../types/Movie";
-import { Button } from "../common/Button.tsx";
+import { Button } from "../Common/Button.tsx";
 import { useNavigate } from "react-router-dom";
-import { EditIcon } from "../common/EditIcon.tsx";
-import { HeartIcon } from "../common/HeartIcon.tsx";
-import { useDelete } from "../../hooks/useDelete.ts";
-import { DeleteIcon } from "../common/DeleteIcon.tsx";
+import { EditIcon } from "../Common/EditIcon.tsx";
+import { HeartIcon } from "../Common/HeartIcon.tsx";
+import { useDeleteMovieMutation } from "../../hooks/useDeleteMovieMutation.ts";
+import { DeleteIcon } from "../Common/DeleteIcon.tsx";
 import { MovieStore } from "../../store/MovieProvider.tsx";
 
 type DetailProps = {
@@ -25,7 +25,7 @@ const valueClass = "text-gray-200";
 
 export function MovieDetails({ movie }: DetailProps) {
   const navigate = useNavigate();
-  const { mutation, isLoading, isError } = useDelete(movie.id);
+  const { mutation, isLoading, isError } = useDeleteMovieMutation(movie.id);
   const { favoritesMovies, toggleFavorite, isInFavorites, handleToEdit } =
     useContext(MovieStore);
 

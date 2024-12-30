@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import { AddEditForm } from "../AddEditForm/AddEditForm.tsx";
+import { AddEditForm } from "../Forms/AddEditForm/AddEditForm.tsx";
 import { Movie } from "../../types/Movie.ts";
 
 type SideMenuProps = {

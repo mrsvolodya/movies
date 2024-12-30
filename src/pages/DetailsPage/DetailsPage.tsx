@@ -1,15 +1,15 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useMovie } from "../../hooks/useMovie.ts";
-import { Loader } from "../../components/common/Loader.tsx";
-import { NotFound } from "../../components/common/NotFound.tsx";
+import { useGetOneMovieQuery } from "../../hooks/useGetOneMovieQuery.ts";
+import { Loader } from "../../components/Common/Loader.tsx";
+import { NotFound } from "../../components/Common/NotFound.tsx";
 import { Header } from "../../components/Header/Header.tsx";
-import { ErrorMessage } from "../../components/common/ErrorMessage.tsx";
+import { ErrorMessage } from "../../components/Common/ErrorMessage.tsx";
 import { MovieDetails } from "../../components/MovieDetails/MovieDetails.tsx";
 
 export function DetailsPage() {
   const { id } = useParams<{ id: string }>();
-  const { data: movie, isLoading, error } = useMovie(id || "");
+  const { data: movie, isLoading, error } = useGetOneMovieQuery(id || "");
 
   if (isLoading) return <Loader />;
   if (!movie) return <NotFound name="Movie" />;
