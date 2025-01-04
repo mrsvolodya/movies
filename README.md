@@ -28,15 +28,15 @@ This project is a **Movie Database Web Application** built using **React** and *
 
 ## Technologies Used
 
+- **Axios**: For making HTTP requests to the backend.
+- **React Hook Form**: Simplifies form handling.
+- **React Router DOM**: For navigation and routing.
 - **React**: JavaScript library for building user interfaces.
 - **TypeScript**: Adds type safety for better development experience.
-- **React Router DOM**: For navigation and routing.
 - **Tailwind CSS**: A utility-first CSS framework for responsive design.
 - **Tanstack Query**: Data fetching and state management tool.
-- **React Hook Form**: Simplifies form handling.
 - **Context API**: For global state management.
 - **SVG Icons**: Custom icons for consistent UI design.
-- **Axios**: For making HTTP requests to the backend.
 - **ruseDebounce**: Optimizes search functionality by debouncing user input.
 - **@headlessui/react**: Provides accessible UI components.
 
