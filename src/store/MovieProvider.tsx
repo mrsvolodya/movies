@@ -1,8 +1,8 @@
-import React, { createContext, useEffect, useState } from "react";
 import { Movie } from "../types/Movie";
 import { useLocation } from "react-router-dom";
 import { StoreType } from "../types/StoreType.ts";
 import { LocalStorageKeys } from "../enums/LocalStorageKeys.ts";
+import React, { createContext, useEffect, useState } from "react";
 
 export const MovieStore = createContext<StoreType>({
   isEditMovie: null,

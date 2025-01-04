@@ -1,10 +1,10 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useGetOneMovieQuery } from "../../hooks/useGetOneMovieQuery.ts";
-import { Loader } from "../../components/Common/Loader.tsx";
-import { NotFound } from "../../components/Common/NotFound.tsx";
 import { Header } from "../../components/Header/Header.tsx";
-import { ErrorMessage } from "../../components/Common/ErrorMessage.tsx";
+import { Loader } from "../../components/common/Loader.tsx";
+import { NotFound } from "../../components/common/NotFound.tsx";
+import { ErrorMessage } from "../../components/common/ErrorMessage.tsx"
+import { useGetOneMovieQuery } from "../../hooks/useGetOneMovieQuery.ts";
 import { MovieDetails } from "../../components/MovieDetails/MovieDetails.tsx";
 
 export function DetailsPage() {

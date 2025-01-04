@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames";
-import { AddEditForm } from "../Forms/AddEditForm/AddEditForm.tsx";
 import { Movie } from "../../types/Movie.ts";
+import { AddEditForm } from "../Forms/AddEditForm/AddEditForm.tsx";
 
 type SideMenuProps = {
   isFormOpen: boolean;

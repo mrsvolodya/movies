@@ -5,9 +5,9 @@ import {
 } from "@tanstack/react-query";
 import { useContext } from "react";
 import { Movie } from "../types/Movie.ts";
-import { updateMovie as update } from "../api/movies.ts";
 import { QueryKeys } from "../enums/QueryKeys.ts";
 import { MovieStore } from "../store/MovieProvider.tsx";
+import { updateMovie as update } from "../api/movies.ts";
 
 export function useUpdateMovieMutation() {
   const queryClient = useQueryClient();

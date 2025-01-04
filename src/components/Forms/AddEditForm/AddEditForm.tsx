@@ -1,12 +1,12 @@
 import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Movie } from "../../../types/Movie.ts";
-import { Loader } from "../../Common/Loader.tsx";
+import { Loader } from "../../common/Loader.tsx";
 import { InputField } from "../InputField/InputField.tsx";
 import { FormValues } from "../../../types/FormValues.ts";
 import { FormButton } from "../FormButton/FormButton.tsx";
 import { AddNewMovie } from "../../../types/AddNewMovie.ts";
-import { ErrorMessage } from "../../Common/ErrorMessage.tsx";
+import { ErrorMessage } from "../../common/ErrorMessage.tsx";
 import { MovieStore } from "../../../store/MovieProvider.tsx";
 import { useKeyListener } from "../../../hooks/useKeyListener.ts";
 import { DEFAULT_VALUES } from "../../../constants/DEFAULT_VALUES.ts";

@@ -1,13 +1,13 @@
 import React from "react";
-import { Loader } from "../Common/Loader.tsx";
+import { Loader } from "../common/Loader.tsx";
 import { Movie } from "../../types/Movie.ts";
-import { NotFound } from "../Common/NotFound.tsx";
+import { NotFound } from "../common/NotFound.tsx";
 import { useSearchParams } from "react-router-dom";
-import { useGetAllMoviesQuery } from "../../hooks/useGetAllMoviesQuery.ts";
-import { ErrorMessage } from "../Common/ErrorMessage.tsx";
 import { MovieCard } from "../MovieCard/MovieCard.tsx";
 import { QueryParams } from "../../enums/QueryParams.ts";
 import { useDebounce } from "../../hooks/useDebounce.ts";
+import { ErrorMessage } from "../common/ErrorMessage.tsx";
+import { useGetAllMoviesQuery } from "../../hooks/useGetAllMoviesQuery.ts";
 import { useFilterMoviesByQuery } from "../../hooks/useFilterMoviesByQuery.ts";
 
 type MoviesListProps = {

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { NavLink, useParams } from "react-router-dom";
 import { SideMenu } from "../SideMenu/SideMenu.tsx";
+import { NavLink, useParams } from "react-router-dom";
 import { HeaderNav } from "../HeaderNav/HeaderNav.tsx";
 import { MovieStore } from "../../store/MovieProvider.tsx";
 import { MovieSearchInput } from "../MovieSearchInput/MovieSearchInput.tsx";

@@ -1,8 +1,8 @@
 import React from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { AddIcon } from "../common/AddIcon.tsx";
+import { HeartIcon } from "../common/HeartIcon.tsx";
 import { Pathnames } from "../../enums/Pathnames.ts";
-import { AddIcon } from "../Common/AddIcon.tsx";
-import { HeartIcon } from "../Common/HeartIcon.tsx";
+import { NavLink, useLocation } from "react-router-dom";
 
 export function HeaderNav({ favoritesCount, toggleMenu, isFormOpen }) {
   const { pathname } = useLocation();
