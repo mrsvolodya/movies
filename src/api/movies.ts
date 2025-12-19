@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Movie } from "../types/Movie";
 
-const BASE_URL = "https://my-movies-backend-06e0a2850da4.herokuapp.com/movies";
+const BASE_URL = process.env.REACT_APP_API_URL;
 
 export async function fetchMovies() {
   const url = BASE_URL;
